@@ -1,4 +1,5 @@
-var mode=localStorage.getItem("mode");
+var mode=localStorage.getItem("mode"); // game mode
+
 const guiBoard=document.getElementById("board");
 const playBtn=document.getElementById("playBtn");
 const label=document.getElementById("label");
@@ -18,6 +19,7 @@ let scores={
     O:100,
     tie:0,
 };
+
 let turn=0;
 let isOver=false;
 let players=[{letter:"X",color:"red"},{letter:"O",color:"blue"}];
@@ -35,6 +37,7 @@ function addEvent(cells){
 
 function makeMove(cell){
     if(cell.dataset.clicked==="true") return;
+
     cell.setAttribute("data-clicked","true");
     cell.innerText=currentPlayer.letter;
     cell.style.color=currentPlayer.color;
@@ -52,6 +55,7 @@ function moveAI(){
     let score=0;
     let bestMove;
     let bestPossibleMoves=[board[1][1],board[0][0]];
+
     // make first move for the AI to boost speed
     if(turn<3){
         for(let cell of bestPossibleMoves){
@@ -80,9 +84,8 @@ function moveAI(){
 }
 
 function minimax(depth,isMax){
-    if(depth>4) return 0; //check first five levels
-    let result=checkForWin(true,isMax);
 
+    let result=checkForWin(true,isMax);
     if(result !==null){
         return scores[result];
     }
@@ -104,7 +107,6 @@ function minimax(depth,isMax){
     }
     else{
         let minScore=Infinity;
-
         for(let row of board){
             for(let cell of row){
                 if(cell.innerText===""){

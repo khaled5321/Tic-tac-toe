@@ -18,9 +18,10 @@
     </header>
 
     <main id="main" class="flex flex-col pt-2 items-center md:pb-24">
-        <div class="flex items-center justify-center gap-6 z-10">
-            <h1 class="py-4 font-bold text-4xl opacity-0 transition" id="label">Draw</h1>
-            <a href="./play.html" class="btn btn-primary hidden" id="playBtn">Play Again</a>
+
+        <div class="after-game hidden">
+            <h1 id="label">Draw</h1>
+            <a href="./play.html" class="btn" id="playBtn">Play Again</a>
         </div>
         
         <div id="board" class="flex  flex-wrap w-[18.75rem] md:w-[28.125rem]  font-marker text-[3.75rem]">
@@ -37,7 +38,7 @@
     </main>
 
     <footer>
-        <div class="flex flex-col items-center">
+        <div>
             <p>Made by <a href="https://github.com/khaled5321" class="credit">Khaled Emad</a></p>
             <a href="https://www.flaticon.com/free-icons/tic-tac-toe" title="tic tac toe icons">logo icon created by Freepik - Flaticon</a>
         </div>

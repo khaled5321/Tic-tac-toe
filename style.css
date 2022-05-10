@@ -127,6 +127,36 @@ footer div p{
 
 /* play page */
 
+#main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding-top: 0.5rem;
+    overflow: clip;
+}
+
+.after-game{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1.5rem;
+    z-index: 10;
+}
+
+.after-game h1{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+
+}
+
+.hidden{
+    visibility: hidden;
+}
+
 svg{
     width:300px ;
     height:300px ;

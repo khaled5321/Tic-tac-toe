@@ -54,6 +54,8 @@ body{
 
 .home-main div{
     display: flex;
+    min-height: 100vh;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
@@ -95,9 +97,8 @@ body{
 }
 
 footer{
-    position: fixed;
+    position: relative;
     min-width: 100vw;
-    bottom: 0;
     background-color:#8e95f29e;
     padding: 1rem;
 }
@@ -210,7 +211,4 @@ svg{
         padding: .75rem 1.5rem;
     }
 
-    footer{
-        position: relative;
-    }
 }

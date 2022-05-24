@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "tic-tac-toe game",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khaled5321/AI-2022.git"
+  },
+  "keywords": [
+    "tic-tac-toe",
+    "multiplayer"
+  ],
+  "author": "Khaled Emad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/khaled5321/AI-2022/issues"
+  },
+  "homepage": "https://github.com/khaled5321/AI-2022#readme"
+}

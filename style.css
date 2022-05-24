@@ -1,0 +1,214 @@
+@font-face {
+    font-family: 'Marker';
+    src: local(''),
+        url("./fonts/PermanentMarker-Regular.ttf");        
+}
+
+*,*::after,*::before{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html{
+    line-height: 1.5;
+}
+
+body{
+    overflow-x: clip;
+    background-color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5deb3;
+    padding: 1rem;
+    min-height: 4rem;
+    width: 100%;
+}
+
+.navbar a{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    color: black;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+}
+
+.navbar a img{
+    width: 3rem;
+    height: auto;
+    
+    margin-right: 0.5rem;
+}
+
+.home-main{    
+    background-color: #f5f5f5;
+    overflow: clip;
+}
+
+.home-main div{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top:6.7rem;
+    padding-bottom:6.7rem;
+}
+
+.btn{
+    background-color: #32936F;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    padding: .75rem 1.2rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}
+
+.btn:hover{
+    background-color: #111827;
+}
+
+.btn:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+footer{
+    position: relative;
+    min-width: 100vw;
+    background-color:#8e95f29e;
+    padding: 1rem;
+}
+
+footer div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:1rem;
+}
+
+footer div p{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+.credit{
+    text-decoration: none;
+    color: #484747;
+}
+
+/* play page */
+
+#main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding-top: 0.5rem;
+    overflow: clip;
+    min-height: 100vh;
+}
+
+.after-game{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1.5rem;
+    z-index: 10;
+}
+
+.after-game h1{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+
+}
+
+#board{
+    display: flex;
+    flex-wrap: wrap;
+    width: 18.75rem;
+    height:18.75rem;
+    font-family: Marker;
+    font-size: 3.75rem;
+}
+
+.cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.25rem;
+    height: 6.25rem;
+    border: solid 0px;
+    border-color: black;
+    user-select: none;
+}
+
+.border-r-8{
+    border-right-width: 8px;
+}
+
+.border-b-8{
+    border-bottom-width: 8px;
+}
+
+svg{
+    width:300px ;
+    height:300px ;
+    position:absolute;
+    left:50%;
+    top:9em; 
+    transform:translate(-50%);
+    overflow:clip;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+@media (min-width:768px) {
+    svg{
+        width:450px;
+        height:450px;
+    }
+
+    #board{
+        width: 28.125rem;
+        height: 28.125rem;
+    }
+
+    .cell{
+        width: 9.375rem;
+        height: 9.375rem;
+    }
+
+    .button-40 {
+        padding: .75rem 1.5rem;
+    }
+
+}

@@ -1,7 +1,7 @@
 var mode=localStorage.getItem("mode"); // game mode
 
 const guiBoard=document.getElementById("board");
-const playBtn=document.getElementById("playBtn");
+const afterGame=document.querySelector(".after-game");
 const label=document.getElementById("label");
 const coordinates={
     start:null,
@@ -133,10 +133,9 @@ function isEqual(a,b,c){
 function gameEnded(){
     guiBoard.style.pointerEvents="none";
     isOver=true;
-    label.style.opacity=1;
+    afterGame.classList.remove('hidden');
     label.style.color=currentPlayer.color;
     label.innerText=`${currentPlayer.letter} wins!`;
-    playBtn.classList.remove('hidden');
 }
 
 function checkForWin(fromMinimax=false,isMax=false){
@@ -210,10 +209,9 @@ function checkForWin(fromMinimax=false,isMax=false){
         if(fromMinimax)return 'tie';
         guiBoard.style.pointerEvents="none";
         isOver=true;
-        label.style.opacity=1;
-        label.style.color="white";
+        afterGame.classList.remove('hidden');
+        label.style.color="black";
         label.innerText="Draw!";
-        playBtn.classList.remove('hidden');
     }
 
 }
@@ -248,29 +246,29 @@ function drawLine(mode,color){
 
     if(mode==="diagnolleft"){
         line.setAttribute("x1", start.xleft);
-        line.setAttribute("y1", start.ytop);
+        line.setAttribute("y1", start.ytop+15);
         line.setAttribute("x2", (end.xright));
-        line.setAttribute("y2", (end.ybottom));
+        line.setAttribute("y2", (end.ybottom+15));
     }
     if(mode==="diagnolright"){
-        line.setAttribute("x1", start.xright);
-        line.setAttribute("y1", start.ytop);
-        line.setAttribute("x2", (end.xleft));
-        line.setAttribute("y2", (end.ybottom));
+        line.setAttribute("x1", start.xright+5);
+        line.setAttribute("y1", start.ytop+15);
+        line.setAttribute("x2", (end.xleft+5));
+        line.setAttribute("y2", (end.ybottom+5));
     }
     if(mode==="row"){
         let half=(start.ybottom-start.ytop)/2
         line.setAttribute("x1", start.xleft);
-        line.setAttribute("y1", (start.ytop+half));
+        line.setAttribute("y1", (start.ytop+half+15));
         line.setAttribute("x2", (end.xright));
-        line.setAttribute("y2", (end.ytop+half));
+        line.setAttribute("y2", (end.ytop+half+15));
     }
     if(mode==="col"){
         let half=(start.xright-start.xleft)/2
         line.setAttribute("x1", (start.xleft+half));
-        line.setAttribute("y1", (start.ytop));
+        line.setAttribute("y1", (start.ytop+15));
         line.setAttribute("x2", (end.xleft+half));
-        line.setAttribute("y2", (end.ybottom));
+        line.setAttribute("y2", (end.ybottom+15));
     }
     svg.appendChild(line);
     main.insertBefore(svg, main.children[0]);

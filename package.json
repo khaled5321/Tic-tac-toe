@@ -1,15 +1,8 @@
 {
   "name": "tic-tac-toe",
   "version": "1.0.0",
-  "description": "tic tac toe game with AI and play online features",
+  "description": "tic-tac-toe game",
   "main": "script.js",
-  "dependencies": {
-    "daisyui": "^2.14.1",
-    "tailwindcss": "^3.0.23"
-  },
-  "devDependencies": {
-    "eslint": "^8.11.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/khaled5321/AI-2022.git"
   },
-  "author": "khaled Haggag",
-  "license": "ISC",
+  "keywords": [
+    "tic-tac-toe",
+    "multiplayer"
+  ],
+  "author": "Khaled Emad",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/khaled5321/AI-2022/issues"
   },

@@ -2,9 +2,8 @@
   "name": "tic-tac-toe",
   "version": "1.0.0",
   "description": "tic-tac-toe game",
-  "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
@@ -19,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/khaled5321/AI-2022/issues"
   },
-  "homepage": "https://github.com/khaled5321/AI-2022#readme"
+  "homepage": "https://github.com/khaled5321/AI-2022#readme",
+  "dependencies": {
+    "firebase": "^9.8.1",
+    "firebase-admin": "^10.2.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
 }

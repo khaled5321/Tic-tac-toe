@@ -1,7 +1,9 @@
 @font-face {
     font-family: 'Marker';
     src: local(''),
-        url("./fonts/PermanentMarker-Regular.ttf");        
+        /* url("./fonts/PermanentMarker-Regular.ttf");  */
+        url("../../fonts/PermanentMarker-Regular.ttf");        
+
 }
 
 *,*::after,*::before{

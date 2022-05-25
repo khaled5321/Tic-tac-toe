@@ -1,6 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+import { initializeApp } from "firebase/app";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, set, onDisconnect, } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBmE5Ccjk52L8ZcMLsJVpyFFmEKXFZHy2A",
@@ -13,11 +13,30 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-let mode = localStorage.getItem("mode");
 
+let mode = localStorage.getItem("mode");
 (function () {
     if (mode === "online") {
-        const auth = getAuth();
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+        let playersRef=ref(database,"players");
+
+        let playerID, playerRef;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                playerID=user.uid;
+                playerRef=ref(database,`players/${playerID}`);
+                set(playerRef,{
+                    id:playerID,
+                    name: "Anonymous"
+                });
+                onDisconnect(playerRef).remove()
+
+            } else {
+                console.log("user logged out!");
+            }
+        });
 
         signInAnonymously(auth)
             .then(() => {
@@ -27,14 +46,5 @@ let mode = localStorage.getItem("mode");
                 const errorMessage = error.message;
                 alert(errorMessage + "refreshPage!");
             });
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log(user)
-                
-            } else {
-                console.log("user logged out!")
-            }
-        });
     }
 })();

@@ -56,7 +56,7 @@ body{
 
 .home-main div{
     display: flex;
-    min-height: 100vh;
+    min-height: 90vh;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -191,6 +191,35 @@ svg{
 
 .hidden{
     visibility: hidden;
+}
+
+/* multiplayer page */
+
+.overlay{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0);
+}
+.dialog{
+    width: 350px;
+    height: 150px;
+    position: absolute;
+    left: 0; 
+    right: 0;
+    top:25%; 
+    margin-left: auto; 
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 20px;
+}
+.dialog-btn{
+    margin-right: 0;
+    margin-left: auto;
 }
 
 @media (min-width:768px) {

@@ -7,7 +7,7 @@ const coordinates={
     start:null,
     end:null,
 }
-let cells=guiBoard.children;
+var cells=guiBoard.children;
 let board=[
     [cells[0],cells[1],cells[2]],
     [cells[3],cells[4],cells[5]],
@@ -22,10 +22,9 @@ let scores={
 
 let turn=0;
 let isOver=false;
-let players=[{letter:"X",color:"red"},{letter:"O",color:"blue"}];
-let player1=players[0];
-let player2=players[1];
-let currentPlayer=players[0];
+let player1={letter:"X",color:"red"};
+let player2={letter:"O",color:"blue"};
+let currentPlayer=player1;
 
 function addEvent(cells){
     for (let cell of cells) {
@@ -36,8 +35,12 @@ function addEvent(cells){
 }
 
 function makeMove(cell){
+    if(mode==="online" && currentPlayer !== player1) return;
     if(cell.dataset.clicked==="true") return;
-
+    if(mode==="online"){
+        // eslint-disable-next-line no-undef
+        updateMove(getIndexOfCell(cell));
+    }
     cell.setAttribute("data-clicked","true");
     cell.innerText=currentPlayer.letter;
     cell.style.color=currentPlayer.color;
@@ -272,6 +275,29 @@ function drawLine(mode,color){
     }
     svg.appendChild(line);
     main.insertBefore(svg, main.children[0]);
+}
+
+// gets the index of the cell in board array
+function getIndexOfCell(cell){
+    for (var i = 0; i < board.length; i++) {
+        var index = board[i].indexOf(cell);
+        if (index > -1) {
+          return [i, index];
+        }
+    }
+}
+
+// sets the players for multiplayer mode
+export function setPlayers(p1,p2){
+    player1=p1;
+    player2=p2;
+}
+
+// display the move on the UI (Multiplayer Mode)
+export function applyMove(cellIndex){
+    console.log(cellIndex);
+    let cell= board[cellIndex[0]][cellIndex[1]];
+    makeMove(cell);
 }
 
 addEvent(cells);

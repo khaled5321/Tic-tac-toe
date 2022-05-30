@@ -6,11 +6,11 @@ module.exports = {
   // The location of the build folder described above
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',    // very important line
-    libraryTarget: 'umd',    // very important line
-    umdNamedDefine: true     // very important line
+    filename: 'bundle.js',    
+    // libraryTarget: 'umd',   
+    // umdNamedDefine: true     
   },
   // Optional and for development only. This provides the ability to
   // map the built code back to the original source format when debugging.
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
 };

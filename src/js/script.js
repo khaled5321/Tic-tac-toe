@@ -287,17 +287,4 @@ function getIndexOfCell(cell){
     }
 }
 
-// sets the players for multiplayer mode
-export function setPlayers(p1,p2){
-    player1=p1;
-    player2=p2;
-}
-
-// display the move on the UI (Multiplayer Mode)
-export function applyMove(cellIndex){
-    console.log(cellIndex);
-    let cell= board[cellIndex[0]][cellIndex[1]];
-    makeMove(cell);
-}
-
 addEvent(cells);

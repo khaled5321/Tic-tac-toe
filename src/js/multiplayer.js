@@ -43,7 +43,6 @@ let p1 = { letter: "X", color: "red" };
 let p2 = { letter: "O", color: "blue" };
 
 function connection(roomRef) {
-
     onValue(roomRef, (snapshot) => {
         let room = snapshot.val() || null;
         if (room) {
@@ -79,7 +78,6 @@ function createRoom(playerID) {
 
     return roomRef;
 }
-
 
 function matchMaking(playerID) {
     let allroomsRef = ref(database, "rooms");
@@ -125,7 +123,7 @@ function setPlayers(p1, p2) {
     player2 = p2;
 }
 
-// display the move on the UI (Multiplayer Mode)
+// display the move from firebase on the UI
 function applyMove(cellIndex,currentplayer) {
     let cell = board[cellIndex[0]][cellIndex[1]];
     currentPlayer=currentplayer;
@@ -134,7 +132,8 @@ function applyMove(cellIndex,currentplayer) {
     currentPlayer.color = (currentPlayer.color === player1.color) ? (player2.color) : (player1.color);
 }
 
-const updateMove = (move) => {
+// write move to firebase database
+function updateMove(move){
     update(roomRef, { move: move, currentplayer:currentPlayer });
 }
 
@@ -149,15 +148,16 @@ function addEvent(cells) {
 }
 
 function makeMove(cell) {
-    if (cell.dataset.clicked === "true") return;
+    if (cell.dataset.clicked === "true") return; // cell already clicked before
     
     cell.setAttribute("data-clicked", "true");
     cell.innerText = currentPlayer.letter;
     cell.style.color = currentPlayer.color;
     checkForWin();
-    updateMove(getIndexOfCell(cell));
+    updateMove(getIndexOfCell(cell)); //send move to firebase database
 }
 
+// utility function to check if 3 cells content is equal
 function isEqual(a, b, c) {
     let equal = (a.innerText === b.innerText) && (b.innerText === c.innerText) && (a.innerText !== "");
     if (equal) {
@@ -167,15 +167,18 @@ function isEqual(a, b, c) {
     return equal;
 }
 
-function gameEnded() {
-    guiBoard.style.pointerEvents = "none";
-    afterGame.classList.remove('hidden');
-    label.style.color = currentPlayer.color;
-    label.innerText = `${currentPlayer.letter} wins!`;
+// gets the index of the cell in board array
+function getIndexOfCell(cell) {
+    for (var i = 0; i < board.length; i++) {
+        var index = board[i].indexOf(cell);
+        if (index > -1) {
+            return [i, index];
+        }
+    }
 }
 
 function checkForWin() {
-    //checkrows
+    //check rows
     if (isEqual(board[0][0], board[0][1], board[0][2]) ||
         isEqual(board[1][0], board[1][1], board[1][2]) ||
         isEqual(board[2][0], board[2][1], board[2][2])) {
@@ -189,15 +192,17 @@ function checkForWin() {
         drawLine("col", currentPlayer.color)
         gameEnded();
     }
-    //check diagnol 
+    //check left diagnol 
     else if (isEqual(board[0][0], board[1][1], board[2][2])) {
         drawLine("diagnolleft", currentPlayer.color);
         gameEnded();
     }
+    //check right diagonal
     else if (isEqual(board[0][2], board[1][1], board[2][0])) {
         drawLine("diagnolright", currentPlayer.color);
         gameEnded();
     }
+    // if no one won check for empty cell, if none then it's a draw
     else {
         for (let row of board) {
             for (let cell of row) {
@@ -213,6 +218,7 @@ function checkForWin() {
     }
 }
 
+// draw winning line after game ends
 function drawLine(mode, color) {
     let main = document.querySelector("#main");
     let parent = {
@@ -271,16 +277,15 @@ function drawLine(mode, color) {
     main.insertBefore(svg, main.children[0]);
 }
 
-// gets the index of the cell in board array
-function getIndexOfCell(cell) {
-    for (var i = 0; i < board.length; i++) {
-        var index = board[i].indexOf(cell);
-        if (index > -1) {
-            return [i, index];
-        }
-    }
+// call after game ends, displays the winner and play again button.
+function gameEnded() {
+    guiBoard.style.pointerEvents = "none";
+    afterGame.classList.remove('hidden');
+    label.style.color = currentPlayer.color;
+    label.innerText = `${currentPlayer.letter} wins!`;
 }
 
+// when the user login or logout
 onAuthStateChanged(auth, (user) => {
     if (user) {
         playerID = user.uid;
@@ -292,15 +297,10 @@ onAuthStateChanged(auth, (user) => {
         onDisconnect(playerRef).remove();
         matchMaking(playerID);
 
-    } else {
-        console.log("user logged out!");
-    }
+    } 
 });
 
 signInAnonymously(auth)
-    .then(() => {
-        console.log("logged successfully!")
-    })
     .catch((error) => {
         const errorMessage = error.message;
         alert(errorMessage + "refreshPage!");

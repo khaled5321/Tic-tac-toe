@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <title>Tic Tac Toe</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <a href="./index.html">
-                <img src="./img/tic-tac-toe-img.png" alt="tic-tac-toe"/>Tic Tac Toe
+            <a href="../../index.html">
+                <img src="../../img/tic-tac-toe-img.png" alt="tic-tac-toe"/>Tic Tac Toe
             </a>
         </nav>
     </header>
 
     <main id="main" class="flex flex-col pt-2 items-center md:pb-24">
-
         <div class="after-game hidden">
             <h1 id="label">Draw</h1>
-            <a href="./play.html" class="btn" id="playBtn">Play Again</a>
+            <a href="./multiplayer.html" class="btn" id="playBtn">Play Again</a>
         </div>
         
         <div id="board">
@@ -35,6 +34,13 @@
             <div class="cell border-r-8"></div>
             <div class="cell"></div>
         </div>
+
+        <div class="overlay">
+            <dialog class="dialog" open>
+                <h3 class="dialog-text">Looking for Opponent...</h3>
+                <a class="btn dialog-btn" href="../../index.html">Cancel</a>
+            </dialog>
+        </div>
     </main>
 
     <footer>
@@ -44,6 +50,7 @@
         </div>
     </footer>
 
-    <script src="./script.js"></script>
+    <script src="../../dist/bundle.js" type="module"></script>
+    <!-- <script src="../js/script.js" type="module"></script> -->
 </body>
 </html>

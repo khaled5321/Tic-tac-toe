@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../../index.html">
+                <img src="../../img/tic-tac-toe-img.png" alt="tic-tac-toe"/>Tic Tac Toe
+            </a>
+        </nav>
+    </header>
+
+    <main id="main" class="flex flex-col pt-2 items-center md:pb-24">
+
+        <div class="after-game hidden">
+            <h1 id="label">Draw</h1>
+            <a href="./play.html" class="btn" id="playBtn">Play Again</a>
+        </div>
+        
+        <div id="board">
+            <div class="cell border-r-8 border-b-8"></div>
+            <div class="cell border-r-8 border-b-8"></div>
+            <div class="cell border-b-8"></div>
+            <div class="cell border-r-8 border-b-8"></div>
+            <div class="cell border-r-8 border-b-8"></div>
+            <div class="cell border-b-8"></div>
+            <div class="cell border-r-8"></div>
+            <div class="cell border-r-8"></div>
+            <div class="cell"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p>Made by <a href="https://github.com/khaled5321" class="credit">Khaled Emad</a></p>
+            <a href="https://www.flaticon.com/free-icons/tic-tac-toe" title="tic tac toe icons">logo icon created by Freepik - Flaticon</a>
+        </div>
+    </footer>
+
+    <script src="../js/script.js" type="module"></script>
+</body>
+</html>

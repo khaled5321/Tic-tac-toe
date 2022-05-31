@@ -22,6 +22,11 @@ const overlay = document.querySelector('.overlay');
 const guiBoard = document.getElementById("board");
 const afterGame = document.querySelector(".after-game");
 const label = document.getElementById("label");
+
+const status = document.querySelector(".status");
+const player1_label = document.getElementById("player1");
+const turn_label = document.getElementById("turn");
+const player2_label = document.getElementById("player2");
 const coordinates = {
     start: null,
     end: null,
@@ -121,6 +126,14 @@ function matchMaking(playerID) {
 function setPlayers(p1, p2) {
     player1 = p1;
     player2 = p2;
+    player1_label.innerText=`You: ${player1.letter}`;
+    player1_label.style.color=player1.color;
+
+    turn_label.innerText=`Turn: ${currentPlayer.letter}`;
+    turn_label.style.color=currentPlayer.color;
+
+    player2_label.innerText=`Opponent: ${player2.letter}`;
+    player2_label.style.color=player2.color;
 }
 
 // display the move from firebase on the UI
@@ -130,6 +143,9 @@ function applyMove(cellIndex,currentplayer) {
     makeMove(cell);
     currentPlayer.letter = (currentPlayer.letter === player1.letter) ? (player2.letter) : (player1.letter);
     currentPlayer.color = (currentPlayer.color === player1.color) ? (player2.color) : (player1.color);
+
+    turn_label.innerText=`Turn: ${currentPlayer.letter}`;
+    turn_label.style.color=currentPlayer.color;
 }
 
 // write move to firebase database
@@ -212,6 +228,7 @@ function checkForWin() {
             }
         }
         guiBoard.style.pointerEvents = "none";
+        status.style.display="none";
         afterGame.classList.remove('hidden');
         label.style.color = "black";
         label.innerText = "Draw!";
@@ -280,6 +297,7 @@ function drawLine(mode, color) {
 // call after game ends, displays the winner and play again button.
 function gameEnded() {
     guiBoard.style.pointerEvents = "none";
+    status.style.display="none";
     afterGame.classList.remove('hidden');
     label.style.color = currentPlayer.color;
     label.innerText = `${currentPlayer.letter} wins!`;

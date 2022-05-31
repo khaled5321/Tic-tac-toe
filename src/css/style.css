@@ -195,6 +195,29 @@ svg{
 
 /* multiplayer page */
 
+.status{
+    position: absolute;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 400px;
+    justify-content: center;
+}
+
+#player1{
+    margin-right: auto;
+    margin-left: 0;
+}
+
+#turn{
+    margin-right: -30px;
+}
+
+#player2{
+    margin-right: 0;
+    margin-left: auto;
+}
+
 .overlay{
     position: absolute;
     width: 100vw;

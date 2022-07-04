@@ -58,6 +58,7 @@ function connection(roomRef) {
 
             if (playerone && playertwo !== "null") {
                 overlay.classList.add('hidden');
+                status.classList.remove('hidden');
 
                 if (move) {
                     applyMove(move,currentplayer);

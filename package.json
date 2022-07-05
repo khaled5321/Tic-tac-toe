@@ -21,7 +21,8 @@
   "homepage": "https://github.com/khaled5321/AI-2022#readme",
   "dependencies": {
     "firebase": "^9.8.1",
-    "firebase-admin": "^10.2.0"
+    "firebase-admin": "^10.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "process": "^0.11.10",

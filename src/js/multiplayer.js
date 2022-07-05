@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, set, onDisconnect, onValue, update } from "firebase/database";
+import { getDatabase, ref, set, onDisconnect, onValue, update, remove } from "firebase/database";
+import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBmE5Ccjk52L8ZcMLsJVpyFFmEKXFZHy2A",
@@ -42,6 +43,7 @@ let board = [
     [cells[6], cells[7], cells[8]],
 ];
 
+let game0ver=false;
 let hasRoom = false;
 let playerID, playerRef, roomRef;
 let p1 = { letter: "X", color: "red" };
@@ -66,15 +68,18 @@ function connection(roomRef) {
             }
         }
         else {
-            overlay.classList.remove('hidden');
-            dialogText.textContent = "Opponent Disconnected!";
-            dialogBTN.textContent = "OK";
+            if(!game0ver){
+                overlay.classList.remove('hidden');
+                dialogText.textContent = "Opponent Disconnected!";
+                dialogBTN.textContent = "OK";
+            }
         }
     });
 }
 
 function createRoom(playerID) {
-    let roomRef = ref(database, `rooms/${playerID}`);
+    let roomID= uuidv4();
+    let roomRef = ref(database, `rooms/${roomID}`);
     set(roomRef, {
         playerOne: playerID,
         playerTwo: "null",
@@ -92,11 +97,11 @@ function matchMaking(playerID) {
         let rooms = snapshot.val();
         if (!hasRoom) {
             if (rooms) {
-                // eslint-disable-next-line no-unused-vars
+                
                 for (let [key, value] of Object.entries(rooms)) {
                     let playertwo = value.playerTwo
                     if (playertwo === "null") {
-                        roomRef = ref(database, `rooms/${value.playerOne}`);
+                        roomRef = ref(database, `rooms/${key}`);
                         hasRoom = true;
                         update(roomRef, { playerTwo: playerID });
                         connection(roomRef);
@@ -117,11 +122,13 @@ function matchMaking(playerID) {
                 connection(roomRef);
                 setPlayers(p1, p2);
             }
+
             //remove room if player disconnects
             onDisconnect(roomRef).remove();
         }
     })
 }
+
 
 // Sets the players
 function setPlayers(p1, p2) {
@@ -228,11 +235,7 @@ function checkForWin() {
                 }
             }
         }
-        guiBoard.style.pointerEvents = "none";
-        status.style.display="none";
-        afterGame.classList.remove('hidden');
-        label.style.color = "black";
-        label.innerText = "Draw!";
+        gameEnded(true);        
     }
 }
 
@@ -296,12 +299,25 @@ function drawLine(mode, color) {
 }
 
 // call after game ends, displays the winner and play again button.
-function gameEnded() {
+function gameEnded(draw=false) {
+    game0ver=true;
     guiBoard.style.pointerEvents = "none";
     status.style.display="none";
     afterGame.classList.remove('hidden');
-    label.style.color = currentPlayer.color;
-    label.innerText = `${currentPlayer.letter} wins!`;
+
+    if(draw){
+        label.style.color = "black";
+        label.innerText = "Draw!";
+    }
+    else{
+        label.style.color = currentPlayer.color;
+        label.innerText = `${currentPlayer.letter} wins!`;
+    }
+
+    setTimeout(function() {
+        remove(roomRef);
+        roomRef=null;
+    }, 1000); 
 }
 
 // when the user login or logout
